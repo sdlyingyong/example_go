@@ -37,7 +37,7 @@ func initDb() (db *sqlx.DB) {
 	db.SetMaxOpenConns(20)
 	//最大处理数
 	db.SetMaxIdleConns(10)
-	fmt.Println("conn mysql success")
+	fmt.Println("initDb success")
 	return
 }
 
