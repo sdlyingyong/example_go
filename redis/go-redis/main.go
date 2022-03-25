@@ -27,15 +27,21 @@ func InitDb() (err error) {
 		fmt.Println("conn redis fail, err :", err)
 		return
 	}
-	fmt.Println("InitDb success")
 
-	////另一个数据库使用 var TwoRdb *redis.Client
-	//TwoRdb = redis.NewClient(&redis.Options{
-	//	Addr:     "localhost:6379",
-	//	Password: "",
-	//	DB:       2, // 另一个redis
-	//})
-	return nil
+	//另一个数据库使用
+	var TwoRdb *redis.Client
+	TwoRdb = redis.NewClient(&redis.Options{
+		Addr:     "localhost:6379",
+		Password: "",
+		DB:       2, //DB 2
+	})
+	_, err = TwoRdb.Ping().Result()
+	if err != nil {
+		fmt.Println("TwoRdb.Ping().Result(), err :", err)
+		return
+	}
+	fmt.Println("InitDb success")
+	return
 }
 
 func main() {
