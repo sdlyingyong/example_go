@@ -15,7 +15,12 @@ var (
 
 //初始化redis连接
 func InitDb() (err error) {
-	rdb = redis.NewClient(&redis.Options{Addr: "localhost:6379", Password: "", DB: 0})
+	//数据库配置
+	rdb = redis.NewClient(&redis.Options{
+		Addr:     "localhost:6379",
+		Password: "",
+		DB:       0,
+	})
 	_, err = rdb.Ping().Result()
 	if err != nil {
 		errors.New("conn redis fail")
@@ -23,6 +28,13 @@ func InitDb() (err error) {
 		return
 	}
 	fmt.Println("InitDb success")
+
+	////另一个数据库使用 var TwoRdb *redis.Client
+	//TwoRdb = redis.NewClient(&redis.Options{
+	//	Addr:     "localhost:6379",
+	//	Password: "",
+	//	DB:       2, // 另一个redis
+	//})
 	return nil
 }
 
