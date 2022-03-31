@@ -9,6 +9,7 @@ import (
 	"github.com/juju/ratelimit"
 )
 
+//接口限制两秒访问一次
 func main() {
 	r := gin.Default()
 	//创建令牌桶
