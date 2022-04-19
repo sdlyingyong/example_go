@@ -18,9 +18,19 @@ func main() {
 	//强密码检查
 	demoCheckStrongPwd()
 
+	//手机号检查
+	demoCheckPhone()
+
 	//极光推送
 	demoJPush()
 
+}
+
+//是否是手机号案例
+func demoCheckPhone() {
+	phone := "12345678911"
+	ret := CheckPhone(phone)
+	fmt.Println("CheckPhone(phone) ret:", ret)
 }
 
 //强密码案例
@@ -47,6 +57,12 @@ func demoJPush() {
 		return
 	}
 	fmt.Println("demoJPush success, ret: ", ret)
+}
+
+//检测手机号码是否合法
+func CheckPhone(phone string) bool {
+	reg := regexp.MustCompile(`^1[3-9]\d{9}$`)
+	return reg.MatchString(phone)
 }
 
 //检测强密码
