@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"os"
 )
@@ -22,6 +23,14 @@ func main() {
 	//v2ex 循环中操作数组元素
 	showForRange()
 
+	//v2ex,读取文件
+	showReadFile()
+
+}
+
+func showReadFile() {
+	file, err := os.Open("")
+	bufio.NewScanner(file)
 }
 
 func showForRange() {
