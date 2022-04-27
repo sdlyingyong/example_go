@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"os"
 	"path"
@@ -32,17 +32,19 @@ func main() {
 	defer resp.Body.Close()
 
 	//文件存储
-	data, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
-		fmt.Println("ioutil.ReadAll(resp.Body) failed, err :", err)
+	//换用io.Copy,解决readAll大文件内存耗尽问题
+	saveFile := fmt.Sprintf("tmp%s", path.Ext(url))
+	file, err := os.Create(saveFile)
+	if err != nil && err != io.EOF {
+		fmt.Println("os.Create(saveFile) failed, err: ", err)
 		return
 	}
+	defer file.Close()
 
-	//根据url获取文件格式
-	saveFile := fmt.Sprintf("tmp%s", path.Ext(url))
-	err = ioutil.WriteFile(saveFile, data, 0644)
-	if err != nil {
-		fmt.Println(`ioutil.WriteFile("tmp", data, 0644)failed, err : `, err)
+	//写入文件
+	_, err = io.Copy(file, resp.Body)
+	if err != nil && err != io.EOF {
+		fmt.Println("io.Copy(file,resp.Body) failed, err: ", err)
 		return
 	}
 
@@ -55,6 +57,7 @@ func main() {
 		return
 	}
 	fmt.Printf("use time : %s , size: %s \n", useTime, humanize.Bytes(uint64(f.Size())))
+	os.Exit(0)
 }
 
 //许愿式编程
@@ -74,6 +77,11 @@ func main() {
 //ty https://speedtest2.niutk.com:8080/download?size=100000000&r=0.5807917751032634
 
 //todo
+//解决oom问题,换用io.copy
 //限制占用内存 2G
 // 充分利用多核,开启协程多线程下载
 //提高速度,也许用fast http
+
+//build
+//linux
+//CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags "-s -w" -o ty main.go
