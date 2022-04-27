@@ -54,7 +54,7 @@ func main() {
 		fmt.Println("os.Stat(saveFile) failed, err: ", err)
 		return
 	}
-	fmt.Printf("use time : %s , size: %s", useTime, humanize.Bytes(uint64(f.Size())))
+	fmt.Printf("use time : %s , size: %s \n", useTime, humanize.Bytes(uint64(f.Size())))
 }
 
 //许愿式编程
