@@ -9,10 +9,21 @@ import (
 
 const SockAddr = "/tmp/echo.sock"
 
+//显示通过socket连接的client
 func echoServer(c net.Conn) {
 	log.Printf("Client connected [%s]", c.RemoteAddr().Network())
-	io.Copy(c, c)
+	reader(c)
+	//io.Copy(c, c)
 	c.Close()
+}
+
+func reader(r io.Reader) {
+	buf := make([]byte, 1024)
+	n, err := r.Read(buf[:])
+	if err != nil {
+		return
+	}
+	println("Client send:", string(buf[0:n]))
 }
 
 func main() {
@@ -20,12 +31,14 @@ func main() {
 		log.Fatal(err)
 	}
 
+	//监听socket
 	l, err := net.Listen("unix", SockAddr)
 	if err != nil {
 		log.Fatal("listen error:", err)
 	}
 	defer l.Close()
 
+	//监听消息
 	for {
 		// Accept new connections, dispatching them to echoServer
 		// in a goroutine.
