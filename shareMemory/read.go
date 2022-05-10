@@ -19,7 +19,7 @@ const (
 	IpcCreate = 00001000
 )
 
-var mode = flag.Int("mode", 0, "0:write 1:read")
+var mode = flag.Int("mode", 1, "0:write 1:read")
 
 func main() {
 	flag.Parse()
