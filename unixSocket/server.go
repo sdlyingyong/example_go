@@ -12,7 +12,7 @@ const SockAddr = "/tmp/echo.sock"
 func echoServer(c net.Conn) {
 	log.Printf("Client connected [%s]", c.RemoteAddr().Network())
 	buf := make([]byte, 1024)
-	n, err := r.Read(buf[:])
+	n, err := c.Read(buf[:])
 	if err != nil {
 		return
 	}
