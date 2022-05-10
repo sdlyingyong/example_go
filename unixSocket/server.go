@@ -1,7 +1,6 @@
 package main
 
 import (
-	"io"
 	"log"
 	"net"
 	"os"
@@ -12,18 +11,14 @@ const SockAddr = "/tmp/echo.sock"
 //显示通过socket连接的client
 func echoServer(c net.Conn) {
 	log.Printf("Client connected [%s]", c.RemoteAddr().Network())
-	reader(c)
-	//io.Copy(c, c)
-	c.Close()
-}
-
-func reader(r io.Reader) {
 	buf := make([]byte, 1024)
 	n, err := r.Read(buf[:])
 	if err != nil {
 		return
 	}
-	println("Client send:", string(buf[0:n]))
+	println("Client send msg:", string(buf[0:n]))
+	//关闭本次连接
+	c.Close()
 }
 
 func main() {
