@@ -24,6 +24,9 @@ func main() {
 	//极光推送
 	demoJPush()
 
+	//字符串转bit字节
+	demo2bit()
+
 }
 
 //是否是手机号案例
@@ -57,6 +60,13 @@ func demoJPush() {
 		return
 	}
 	fmt.Println("demoJPush success, ret: ", ret)
+}
+
+//字符串转bit字节案例
+func demo2bit() {
+	str := "hello"
+	bit := StringToBit(str)
+	fmt.Println(str, " to bit is : ", bit)
 }
 
 //检测手机号码是否合法
@@ -170,5 +180,19 @@ func PushExec(tags []string, alias []string, title, alert string, _type uint8, m
 		Msg_id string
 	}{}
 	json.Unmarshal(data, &ret)
+	return
+}
+
+// stringToBit converts a string to a bit string.
+func StringToBit(s string) (dst []int) {
+	dst = make([]int, 0)
+	for _, v := range s {
+		{
+			for i := 0; i < 8; i++ {
+				move := uint(7 - i)
+				dst = append(dst, int(v>>move&1))
+			}
+		}
+	}
 	return
 }
