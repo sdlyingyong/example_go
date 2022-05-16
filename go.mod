@@ -18,6 +18,7 @@ require (
 	github.com/gin-gonic/gin v1.7.7
 	github.com/go-redis/redis v6.15.9+incompatible
 	github.com/go-sql-driver/mysql v1.6.0
+	github.com/google/gopacket v1.1.19 // indirect
 	github.com/jmoiron/sqlx v1.3.4
 	github.com/juju/ratelimit v1.0.1
 	github.com/mojocn/base64Captcha v0.0.0-20190801020520-752b1cd608b2
@@ -29,6 +30,7 @@ require (
 	github.com/tealeg/xlsx v1.0.5
 	go.uber.org/ratelimit v0.2.0
 	go.uber.org/zap v1.21.0
+	golang.org/x/net v0.0.0-20220412020605-290c469a71a5
 	gopkg.in/mgo.v2 v2.0.0-20190816093944-a6b53ec6cb22
 	gotest.tools/v3 v3.2.0 // indirect
 )
