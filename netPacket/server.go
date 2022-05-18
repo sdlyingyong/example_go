@@ -87,9 +87,9 @@ func showNetPacket() {
 	packetSource := gopacket.NewPacketSource(handle, handle.LinkType())
 	for packet := range packetSource.Packets() {
 		//输出ip报文信息
-		//printIPPacket(packet)
+		printIPPacket(packet)
 		//输出UDP报文信息
-		//printUDPInfo(packet)
+		printUDPInfo(packet)
 		//输出TCP报文信息
 		printTCPInfo(packet)
 	}
