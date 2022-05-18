@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="eaf046fc-08b8-4661-ad79-1ba2136995b2" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Go File" />
+      </list>
+    </option>
+  </component>
+  <component name="GOROOT" path="D:\tianyou\go_sdk\go1.16" />
+  <component name="ProjectId" id="20ktP1biFJu5Kste8lwjtKMX8cQ" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DefaultGoTemplateProperty" value="Go File" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="go.import.settings.migrated" value="true" />
+    <property name="last_opened_file_path" value="$USER_HOME$" />
+    <property name="settings.editor.selected.configurable" value="go.sdk" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\tianyou\dev\log_agent_ty\test\etcd_demo" />
+      <recent name="D:\tianyou\dev\log_agent_ty\test\tail_demo" />
+      <recent name="D:\tianyou\dev\log_agent_ty" />
+      <recent name="D:\tianyou\dev\log_agent_ty\test" />
+      <recent name="D:\tianyou\dev\log_agent_ty\tail" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Go Build.go build etcd/put">
+    <configuration name="go build etcd_demo" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="log_agent_ty" />
+      <working_directory value="$PROJECT_DIR$/test/etcd_demo" />
+      <kind value="PACKAGE" />
+      <filePath value="$PROJECT_DIR$/test/etcd_demo/main.go" />
+      <package value="etcd_demo" />
+      <directory value="$PROJECT_DIR$/" />
+      <method v="2" />
+    </configuration>
+    <configuration name="go build etcd/put" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="log_agent_ty" />
+      <working_directory value="$PROJECT_DIR$/etcd/put" />
+      <kind value="PACKAGE" />
+      <filePath value="$PROJECT_DIR$/etcd/put/main.go" />
+      <package value="etcd/put" />
+      <directory value="$PROJECT_DIR$/" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Go Build.go build etcd/put" />
+        <item itemvalue="Go Build.go build etcd_demo" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VgoProject">
+    <integration-enabled>true</integration-enabled>
+    <proxy>https://goproxy.cn</proxy>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="1177" y="326" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1636611642261">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="1177" y="326" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1636611642261" />
+    <state x="1053" y="100" width="774" height="847" key="DiffContextDialog" timestamp="1636613593666">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="1053" y="100" width="774" height="847" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1636613593666" />
+    <state width="914" height="278" key="GridCell.Tab.0.bottom" timestamp="1636949284994">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="914" height="278" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1636949284994" />
+    <state width="914" height="278" key="GridCell.Tab.0.center" timestamp="1636949284994">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="914" height="278" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1636949284994" />
+    <state width="914" height="278" key="GridCell.Tab.0.left" timestamp="1636949284993">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="914" height="278" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1636949284993" />
+    <state width="914" height="278" key="GridCell.Tab.0.right" timestamp="1636949284994">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="914" height="278" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1636949284994" />
+    <state x="922" y="162" key="SettingsEditor" timestamp="1636607810589">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="922" y="162" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1636607810589" />
+    <state x="1116" y="256" width="647" height="534" key="find.popup" timestamp="1636954141083">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="1116" y="256" width="647" height="534" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1636954141083" />
+    <state x="1103" y="230" width="672" height="678" key="search.everywhere.popup" timestamp="1636956141599">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="1103" y="230" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1636956141599" />
+  </component>
+</project>
