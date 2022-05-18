@@ -22,6 +22,7 @@ require (
 	github.com/jmoiron/sqlx v1.3.4
 	github.com/juju/ratelimit v1.0.1
 	github.com/mojocn/base64Captcha v0.0.0-20190801020520-752b1cd608b2
+	github.com/olivere/elastic/v7 v7.0.32
 	github.com/onsi/ginkgo v1.16.5 // indirect
 	github.com/onsi/gomega v1.18.1 // indirect
 	github.com/pierrec/lz4 v2.6.1+incompatible // indirect
