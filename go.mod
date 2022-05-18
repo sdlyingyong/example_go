@@ -33,5 +33,6 @@ require (
 	go.uber.org/ratelimit v0.2.0
 	go.uber.org/zap v1.21.0
 	gopkg.in/mgo.v2 v2.0.0-20190816093944-a6b53ec6cb22
+	gotest.tools v2.2.0+incompatible
 	gotest.tools/v3 v3.2.0 // indirect
 )
