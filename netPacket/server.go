@@ -170,7 +170,7 @@ func printUDPInfo(packet gopacket.Packet) (err error) {
 }
 
 //输出ip报文的信息
-func printIPPacket(packet gopacket.Packet) (err error) {
+func  (packet gopacket.Packet) (err error) {
 	// Let's see if the packet is IP (even though the ether type told us)
 	ipLayer := packet.Layer(layers.LayerTypeIPv4)
 	if ipLayer == nil {
