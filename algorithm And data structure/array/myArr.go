@@ -234,6 +234,11 @@ func (ma *MyArr) Remove(index int) (value interface{}) {
 	}
 	//最后一个元素设置为nil
 	ma.data[ma.GetLen()-1] = nil
+	//缩容操作,如果当前元素长度为容量的1/4,则缩容
+	if ma.GetLen() <= ma.GetSize()/4 && ma.GetLen()/2 != 0 {
+		//制造一个1/4长度的数组,并遍历拷贝当前所有元素
+		//code...
+	}
 	return
 }
 
@@ -334,6 +339,6 @@ func main() {
 	// testSet()
 	// testContains()
 	// testSearch()
-	// testRemove()
+	testRemove()
 	// testResize()
 }
