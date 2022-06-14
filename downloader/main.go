@@ -2,11 +2,12 @@ package main
 
 import (
 	"fmt"
-	"io"
-	"net/http"
+	"io/ioutil"
 	"os"
 	"path"
 	"time"
+
+	"github.com/valyala/fasthttp"
 
 	humanize "github.com/dustin/go-humanize"
 )
@@ -23,28 +24,44 @@ func main() {
 	fmt.Println("请求的链接是: ", url)
 	startTime := time.Now()
 
+	////网络请求,文件获取
+	//resp, err := http.Get(url)
+	//if err != nil {
+	//	fmt.Println("fasthttp.Get(nil,url) failed, err :", err)
+	//	return
+	//}
+	//defer resp.Body.Close()
+	//
+	////文件存储
+	////换用io.Copy,解决readAll大文件内存耗尽问题
+	//saveFile := fmt.Sprintf("tmp%s", path.Ext(url))
+	//file, err := os.Create(saveFile)
+	//if err != nil && err != io.EOF {
+	//	fmt.Println("os.Create(saveFile) failed, err: ", err)
+	//	return
+	//}
+	//defer file.Close()
+	//
+	////写入文件
+	//_, err = io.Copy(file, resp.Body)
+	//if err != nil && err != io.EOF {
+	//	fmt.Println("io.Copy(file,resp.Body) failed, err: ", err)
+	//	return
+	//}
+
 	//网络请求,文件获取
-	resp, err := http.Get(url)
+	_, resp, err := fasthttp.Get(nil, url)
 	if err != nil {
-		fmt.Println("fasthttp.Get(nil,url) failed, err :", err)
+		fmt.Println("请求失败:", err.Error())
 		return
 	}
-	defer resp.Body.Close()
-
 	//文件存储
-	//换用io.Copy,解决readAll大文件内存耗尽问题
-	saveFile := fmt.Sprintf("tmp%s", path.Ext(url))
-	file, err := os.Create(saveFile)
-	if err != nil && err != io.EOF {
-		fmt.Println("os.Create(saveFile) failed, err: ", err)
-		return
-	}
-	defer file.Close()
-
 	//写入文件
-	_, err = io.Copy(file, resp.Body)
-	if err != nil && err != io.EOF {
-		fmt.Println("io.Copy(file,resp.Body) failed, err: ", err)
+	data := resp
+	saveFile := fmt.Sprintf("tmp%s", path.Ext(url))
+	err = ioutil.WriteFile(saveFile, data, 0644)
+	if err != nil {
+		fmt.Println("ioutil.WriteFile(saveFile, data, 0644) failed, err:", err)
 		return
 	}
 
@@ -85,3 +102,31 @@ func main() {
 //build
 //linux
 //CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags "-s -w" -o ty main.go
+
+//速度优化
+//http
+//100m=1s 500mb=5s 1000mb=10s
+//fastHttp
+//
+
+//fastHttp
+//测试  需要1000mb=37s
+func getData() ([]byte, error) {
+	url := "https://speedtest2.niutk.com:8080/download?size=100000000&r=0.5807917751032634"
+	_, resp, err := fasthttp.Get(nil, url)
+	if err != nil {
+		fmt.Println("请求失败:", err.Error())
+		return nil, err
+	}
+	fmt.Println(len(resp))
+
+	//写入文件
+	data := resp
+	saveFile := fmt.Sprintf("tmp%s", path.Ext(url))
+	err = ioutil.WriteFile(saveFile, data, 0644)
+	if err != nil {
+		fmt.Println("ioutil.WriteFile(saveFile, data, 0644) failed, err:", err)
+		return nil, err
+	}
+	return resp, err
+}
