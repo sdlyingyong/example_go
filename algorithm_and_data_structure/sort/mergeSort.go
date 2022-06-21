@@ -7,18 +7,47 @@ import (
 )
 
 func main() {
-	testMerge()
-	testMergeSort()
-	testTimeO()
-	TestTimeO2()
+	// testMerge()
+	// testMergeSort()
+	// testTimeO()
+	// TestTimeO2()
+	testMergeSortDep()
 }
 
-func testSort() {
+//打印归并排序的过程
+func testMergeSortDep() {
 	arr := generateArrayRandom(10)
-	fmt.Println("arr :", arr)
-	arr = mergeSort(arr)
-	fmt.Println("ret :", arr)
+	arr = mergeSortDep(arr, 0)
+	fmt.Println("testMergeSortDep ret :", arr)
 	checkSort(arr)
+}
+
+func printLine(depth int) {
+	for i := 0; i < depth; i++ {
+		fmt.Print("--")
+	}
+	fmt.Println()
+}
+
+//合并排序带深度
+func mergeSortDep(arr []int, dep int) (ret []int) {
+	printLine(dep)
+	len := len(arr)
+	if len < 2 {
+		ret = arr
+		fmt.Println("返回单个元素 :", ret)
+		return
+	}
+	mid := len / 2
+	left := arr[0:mid] //不包含mid
+	right := arr[mid:] //从mid到最后
+	fmt.Println("拆分为两个数组 left :", left, "right :", right)
+	l := mergeSortDep(left, dep+1)
+	r := mergeSortDep(right, dep+1)
+	fmt.Printf("开始合并 left: %d, right: %d : \n", l, r)
+	ret = merge(l, r)
+	fmt.Println("合并两个数组为一个 ret: ", ret)
+	return
 }
 
 //合并排序
