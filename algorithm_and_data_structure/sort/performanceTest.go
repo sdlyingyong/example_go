@@ -7,14 +7,16 @@ import (
 )
 
 func main() {
+	var testLen int = 1e5
+
 	fmt.Println("sectionSort")
-	TestTimeVs(1e5, sectionSort)
+	TestTimeVs(testLen, sectionSort)
 
 	fmt.Println("insertionSort")
-	TestTimeVs(1e5, insertionSort)
+	TestTimeVs(testLen, insertionSort)
 
 	fmt.Println("mergeSort")
-	TestTimeVs(1e5, mergeSort)
+	TestTimeVs(testLen, mergeSort) //多两个数量级,都依旧小于section的耗时
 }
 
 //测试同样数据,归并排序和插入排序,选择排序的耗时
