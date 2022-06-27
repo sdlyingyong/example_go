@@ -6,17 +6,26 @@ import (
 	"time"
 )
 
-func main() {
-	var testLen int = 1e5
+var (
+	testLen int = 1e5 //测试数量级
+)
 
-	fmt.Println("sectionSort")
-	TestTimeVs(testLen, sectionSort)
+func main() {
+
+	fmt.Println("quickSortBase")
+	TestTimeVs(testLen, quickSortBase)
+
+	// fmt.Println("quickSortMe")
+	// TestTimeVs(testLen, quickSortMe)
+
+	fmt.Println("mergeSort")
+	TestTimeVs(testLen, mergeSort) //多两个数量级,都依旧小于section的耗时
 
 	fmt.Println("insertionSort")
 	TestTimeVs(testLen, insertionSort)
 
-	fmt.Println("mergeSort")
-	TestTimeVs(testLen, mergeSort) //多两个数量级,都依旧小于section的耗时
+	fmt.Println("sectionSort")
+	TestTimeVs(testLen, sectionSort)
 }
 
 //测试同样数据,归并排序和插入排序,选择排序的耗时
@@ -108,9 +117,39 @@ func insertionSort(arr []int) []int {
 	return arr
 }
 
+//快速排序 标准版
+func quickSortBase(arr []int) []int {
+	return quickSortBaseHelp(arr, 0, len(arr)-1)
+}
+
+//快速排序 标准版
+//辅助函数
+func quickSortBaseHelp(arr []int, low, high int) []int {
+	if low >= high {
+		return arr
+	}
+	arr, p := partition(arr, low, high)
+	arr = quickSortBaseHelp(arr, low, p-1)
+	arr = quickSortBaseHelp(arr, p+1, high)
+	return arr
+}
+
+func partition(arr []int, low, high int) ([]int, int) {
+	pivot := arr[high]
+	i := low
+	for j := low; j < high; j++ {
+		if arr[j] < pivot {
+			arr[i], arr[j] = arr[j], arr[i]
+			i++
+		}
+	}
+	arr[i], arr[high] = arr[high], arr[i]
+	return arr, i
+}
+
 //------------辅助函数-----------------
 
-//生成数组长度n,乱序的数组
+//生成数组长度n,乱序不重复的数组
 func generateArrayRandom(n int) []int {
 	arr := make([]int, n)
 	for i := 0; i < n; i++ {

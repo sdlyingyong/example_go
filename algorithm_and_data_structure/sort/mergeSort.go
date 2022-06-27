@@ -11,7 +11,46 @@ func main() {
 	// testMergeSort()
 	// testTimeO()
 	// TestTimeO2()
-	testMergeSortDep()
+	// testMergeSortDep()
+	// testMergeBetter()
+	TestMergeSortUpward()
+}
+
+// 	数组长度:  4000000
+// 运行时间: 1.847265s
+// ok
+// 数组长度:  4000000
+// 运行时间: 1.4152578s
+// ok
+func testMergeBetter() {
+
+	//测试归并排序
+	var testnum int = 1e6 * 4
+	input := generateArrayRandom(testnum)
+	//运行时间
+	start := time.Now()
+	ret := mergeSort(input)
+	//数组长度
+	fmt.Println("数组长度: ", len(ret))
+	//结束时间
+	end := time.Now()
+	fmt.Println("运行时间:", end.Sub(start))
+	//检查ret是否排序
+	checkSort(ret)
+
+	//测试归并排序优化版 len<15使用归并
+	input = generateArrayRandom(testnum)
+	//运行时间
+	start = time.Now()
+	ret = mergeSortBetterTime(input)
+	//数组长度
+	fmt.Println("数组长度: ", len(ret))
+	//结束时间
+	end = time.Now()
+	fmt.Println("运行时间:", end.Sub(start))
+	//检查ret是否排序
+	checkSort(ret)
+
 }
 
 //打印归并排序的过程
@@ -188,9 +227,13 @@ func TestTimeO2() {
 
 //检查排序数组
 func checkSort(arr []int) {
+	if len(arr) == 0 {
+		fmt.Println("error: empty")
+		return
+	}
 	for i := 0; i < len(arr)-1; i++ {
 		if arr[i] > arr[i+1] {
-			fmt.Println("error")
+			fmt.Println("error: un sort")
 			return
 		}
 	}
@@ -208,4 +251,137 @@ func generateArrayRandom(n int) []int {
 		arr[i], arr[j] = arr[j], arr[i]
 	}
 	return arr
+}
+
+//插入排序法
+func insertionSort(arr []int) []int {
+	//一范围 从头开始,每次挑选一个元素,current = arr[i]
+	for i := range arr {
+		current := arr[i]
+		//二范围 从arr[i-1]开始,直到arr[0],进行对比 index j
+		preIndex := i - 1
+		//如果arr[j]>current,就把这个元素位置往后一位放, arr[j+1] = arr[j]
+		//随后j--,直到为0或者arr[j]<current,此时把current放在这里 arr[j] = current
+		for preIndex >= 0 && arr[preIndex] > current {
+			arr[preIndex+1] = arr[preIndex]
+			preIndex--
+		}
+		arr[preIndex+1] = current
+	}
+	//返回数组
+	return arr
+}
+
+//合并排序优化
+//使用插入排序处理小于15的数组,减少
+func mergeSortBetterTime(arr []int) (ret []int) {
+	len := len(arr)
+	//如果数量少的时候,使用插入排序法
+	if len <= 15 {
+		return insertionSort(arr)
+	}
+	if len < 2 {
+		ret = arr
+		return
+	}
+	mid := len / 2
+	left := arr[0:mid] //不包含mid
+	right := arr[mid:] //从mid到最后
+	return merge(mergeSortBetterTime(left), mergeSortBetterTime(right))
+}
+
+//自底向上的归并排序
+func mergeSortUpward(arr []int) (ret []int) {
+	//1.最小情况的解决方案
+	if len(arr) == 2 {
+		if arr[0] < arr[1] {
+			ret = []int{arr[0], arr[1]}
+		} else {
+			ret = []int{arr[1], arr[0]}
+		}
+	}
+	//2.递归,当做调用子函数
+	ret = merge([]int{1, 4}, []int{2, 3})
+	return
+}
+
+// func mergeSortButton2Top(arr []int) {
+// 	var lenth int = len(arr)
+// 	for size := 1; size <= lenth; size += size {
+// 		for i := 0; i+size < lenth; i += 2 * size { //对[i,i+size-1]和[i+size,i+2*size-1]进行归并
+// 			merge2(arr, i, i+size-1, int(math.Min(float64(i+2*size-1), float64(lenth-1)))) // arr left mid right  如果i+2*size>n了，越界了，就取n-1
+// 		}
+// 	}
+// }
+
+// func merge2(arr []int, left, mid, right int) {
+// 	// 将要合并的部分做个拷贝
+// 	var tmp []int = make([]int, right-left+1)
+// 	for i, j := left, 0; i <= right; i++ {
+// 		tmp[j] = arr[i]
+// 		j++
+// 	}
+// 	// i做为左半部分的指针   j作为右半部分的指针
+// 	var i, j int = left, mid + 1
+// 	for k := left; k <= right; k++ {
+// 		if i > mid { // 左半部分 已经合入完了，将右半部分剩下的 全部合入
+// 			arr[k] = tmp[j-left]
+// 			j++
+// 		} else if j > right { // 右半部分 已经合入完了，将左半部分剩下的 全部合入
+// 			arr[k] = tmp[i-left]
+// 			i++
+// 		} else if tmp[i-left] > tmp[j-left] {
+// 			arr[k] = tmp[j-left]
+// 			j++
+// 		} else {
+// 			arr[k] = tmp[i-left]
+// 			i++
+// 		}
+// 	}
+// }
+
+//自底向上的归并排序
+//辅助函数
+func mergeSortUpwardHelper(arr, left, right []int) (ret []int) {
+	// //所有元素两两组成有序数组
+	// for i := 0; i < len(arr); i += 2 {
+	// 	//两个元素排序
+	// 	if i+1 > len(arr) {
+	// 		return []int{arr[i+1]}
+	// 	}
+	// 	if arr[i] < arr[i+1] {
+	// 		ret = []int{arr[i], arr[i+1]}
+	// 	} else {
+	// 		ret = []int{arr[i+1], arr[i]}
+	// 	}
+	// 	return
+	// }
+	//1.最小情况
+	if len(left) == 2 {
+		if arr[0] < arr[1] {
+			ret = []int{arr[0], arr[1]}
+		} else {
+			ret = []int{arr[1], arr[0]}
+		}
+	}
+	//2.当做调用别的函数
+	return
+}
+
+func TestMergeSortUpward() {
+	//测试归并排序
+	var testnum int = 1e6 * 4
+	input := generateArrayRandom(testnum)
+	input = []int{1, 4, 2, 3}
+	//运行时间
+	start := time.Now()
+	ret := mergeSortUpward(input)
+	fmt.Println("ret :", ret)
+	//数组长度
+	fmt.Println("数组长度: ", len(ret))
+	//结束时间
+	end := time.Now()
+	fmt.Println("运行时间:", end.Sub(start))
+	//检查ret是否排序
+	checkSort(ret)
 }
