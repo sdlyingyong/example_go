@@ -18,6 +18,7 @@ func minEatingSpeed(piles []int, h int) (k int) {
 	for left < right {
 		mid := left + (right-left)/2
 		if eatingTime(piles, mid) <= h {
+			//耗在可用时间范围内,继续缩小k的范围
 			//范围 [left...mid]
 			right = mid
 		} else {
