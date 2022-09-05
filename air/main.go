@@ -74,7 +74,7 @@ func checkWeekend(day time.Time) (isWeekend bool) {
 func main() {
 
 	//当前时间
-	now := time.Now().Add(time.Hour * 24 * 5)
+	now := time.Now()
 	//后续时间
 	timeArr := []time.Duration{
 		// 	一、 复习点的确定（根据艾宾浩斯记忆曲线制定）：
